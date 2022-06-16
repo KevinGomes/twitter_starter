@@ -2,11 +2,12 @@ import * as React from "react"
 import AvatarIcon from "../AvatarIcon/AvatarIcon"
 import "./Navbar.css"
 
-export default function Navbar({ navLinks }) {
+export default function Navbar({navLinks}) {
+  //console.log(navLinks.link)
   return (
     <nav>
       <div className="navbar-container">
-        <NavLinks />
+        <NavLinks navLinks={navLinks}/>
         <TwitterIcon />
         <SearchBar />
         <TweetButton />
@@ -15,15 +16,21 @@ export default function Navbar({ navLinks }) {
   )
 }
 
-export function NavLinks({ navLinks }) {
-  return <ul className="nav-links">{/* WRITE CODE HERE */}</ul>
+export function NavLinks({navLinks}) {
+  return( 
+  <ul className="nav-links">
+    {navLinks.map((link) => 
+    <NavLink key={link.label} navLink={link}/>
+    )}
+  </ul>
+  )
 }
 
-export function NavLink({ navLink }) {
+export function NavLink({navLink}) {
   return (
     <li className={navLink.className}>
       <i className={navLink.icon}></i>
-      <span></span>
+      <span>{navLink.label}</span>
     </li>
   )
 }
